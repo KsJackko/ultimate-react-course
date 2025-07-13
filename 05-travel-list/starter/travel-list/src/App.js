@@ -1,97 +1,47 @@
 import { useState } from 'react';
+import Form from './components/Form';
+import PackingList from './components/PackingList';
+import Stats from './components/Stats';
 
 const initialItems = [
   { id: 1, description: 'Passports', quantity: 2, packed: false },
   { id: 2, description: 'Socks', quantity: 12, packed: false },
   { id: 3, description: 'charger', quantity: 1, packed: false },
-  { id: 4, description: 'Socks', quantity: 12, packed: true },
+  { id: 4, description: 'condom', quantity: 10, packed: false },
 ];
-const ids = initialItems.map((item) => item.id);
 
 function App() {
+  const [items, setItems] = useState(initialItems);
+
+  function handleDeleteItem(id) {
+    setItems((items) => items.filter((item) => item.id !== id));
+  }
+
+  function handleToggleItem(id) {
+    setItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, packed: !item.packed } : item
+      )
+    );
+  }
+  function handleReset() {
+    const confirmed = window.confirm('Are you sure to delete all items?');
+    if (confirmed) setItems([]);
+  }
   return (
     <div className="app">
-      <Logo />
-      <Form />
-      <PackingList />
-      <Stats />
-    </div>
-  );
-}
-
-function Logo() {
-  return <h1>Far Away</h1>;
-}
-
-function Form() {
-  const [description, setDescription] = useState('');
-  const [quantity, setQuantity] = useState(1);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    const newItem = {
-      id: Date.now(),
-      description: description,
-      quantity: quantity,
-      packed: false,
-    };
-    initialItems.push(newItem);
-    console.log(initialItems);
-    setDescription('');
-    setQuantity('');
-  }
-
-  function handleOnChange(e) {
-    setDescription(e.target.value);
-  }
-
-  return (
-    <form className="add-form" onSubmit={handleSubmit}>
-      <h3>What do you need for your trip?</h3>
-      <select value={quantity} onChange={(e) => setQuantity(+e.target.value)}>
-        {ids.map((num) => (
-          <option value={num}>{num}</option>
-        ))}
-      </select>
-      <input
-        type="text"
-        placeholder="item..."
-        value={description}
-        onChange={(e) => handleOnChange(e)}
+      <h1>🏝️ Far Away 🧳</h1>
+      <Form onItems={setItems} />
+      <PackingList
+        items={items}
+        onItems={setItems}
+        onDeleteItem={handleDeleteItem}
+        onToggleItem={handleToggleItem}
+        onReset={handleReset}
       />
-      <button>ADD</button>
-    </form>
-  );
-}
-
-function PackingList() {
-  return (
-    <div className="list">
-      <ul>
-        {initialItems.map((item) => (
-          <Item item={item} />
-        ))}
-      </ul>
+      <Stats items={items} />
     </div>
   );
 }
 
-function Item({ item }) {
-  return (
-    <li>
-      <span style={item.packed ? { textDecoration: 'line-through' } : {}}>
-        {item.quantity} {item.description}
-      </span>
-      <button>❌</button>
-    </li>
-  );
-}
-
-function Stats() {
-  return (
-    <footer className="stats">
-      <em>You have X items on your list, and you already packed X (X%)</em>
-    </footer>
-  );
-}
 export default App;

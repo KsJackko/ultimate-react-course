@@ -1,37 +1,51 @@
 import React from 'react';
-import { useState } from 'react';
+// import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
-// import './index.css';
-// import App from './App';
-import StarRating from './StarRating';
+import './index.css';
+import App from './App-v1';
+// import StarRating from './StarRating';
 
-function Test() {
-  const [movieRating, SetMovieRating] = useState(0);
-  function handleMovieRating(rating) {
-    SetMovieRating(rating);
-  }
-  return (
-    <div>
-      <StarRating maxRating={10} onSetRating={handleMovieRating} />
-      <p>This movie was rated {movieRating} stars</p>
-    </div>
-  );
-}
+// function Test() {
+//   const [movieRating, SetMovieRating] = useState(0);
+//   function handleMovieRating(rating) {
+//     SetMovieRating(rating);
+//   }
+//   return (
+//     <div>
+//       <StarRating maxRating={10} onSetRating={handleMovieRating} />
+//       <p>This movie was rated {movieRating} stars</p>
+//     </div>
+//   );
+// }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(
+//   <React.StrictMode>
+//     {/* <App /> */}
+//     <StarRating
+//       maxRating={'sss'}
+//       messages={['Terrible', 'Bad', 'Okay', 'Good', 'Amazing']}
+//     />
+//     <StarRating
+//       maxRating={5}
+//       color={'red'}
+//       className="test"
+//       defaultRating={3}
+//     />
+//     <Test />
+//   </React.StrictMode>
+// );
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    {/* <App /> */}
-    <StarRating
-      maxRating={'sss'}
-      messages={['Terrible', 'Bad', 'Okay', 'Good', 'Amazing']}
-    />
-    <StarRating
+    <App />
+    {/* <StarRating
       maxRating={5}
-      color={'red'}
-      className="test"
-      defaultRating={3}
+      messages={["Terrible", "Bad", "Okay", "Good", "Amazing"]}
     />
-    <Test />
+    <StarRating size={24} color="red" className="test" defaultRating={2} />
+
+    <Test /> */}
   </React.StrictMode>
 );

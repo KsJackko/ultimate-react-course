@@ -2,7 +2,7 @@ import React from 'react';
 // import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App-v1';
+import App from './App-v2';
 // import StarRating from './StarRating';
 
 // function Test() {
@@ -36,7 +36,7 @@ import App from './App-v1';
 //   </React.StrictMode>
 // );
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
@@ -47,5 +47,5 @@ root.render(
     <StarRating size={24} color="red" className="test" defaultRating={2} />
 
     <Test /> */}
-  </React.StrictMode>
+  </React.StrictMode>,
 );

@@ -42,10 +42,6 @@ const accountSlice = createSlice({
   },
 });
 
-console.log(accountSlice);
-
-export const { payLoan, requestLoan, withdraw } = accountSlice.actions;
-
 export function deposit(amount, currency) {
   if (currency === 'USD') return { type: 'account/deposit', payload: amount };
   return async function (dispatch, getState) {
@@ -63,7 +59,7 @@ export function deposit(amount, currency) {
   };
 }
 
-console.log(requestLoan(1000, 'Buy car'));
+export const { payLoan, requestLoan, withdraw } = accountSlice.actions;
 
 export default accountSlice.reducer;
 
